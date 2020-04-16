@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 
-const defaultIcon = "https://psv4.userapi.com/c856220/u11879299/docs/d9/50be7df98b9d/harms.png?extra=8TNBeNMoQmoeMqzNmwwfguXe6A6fDaoFTfyICeRtQDbvTqYJaQ7vx8piGUrmCXYhqDBfYP0oqjwAqXqM0moxTX4hAEfBKEomDu2i839FK_gWnOcTRBXX8r5HxUJyOUwv6R5zOJhapCwyNMYG8JsiKQ"
+const defaultIcon = "https://psv4.userapi.com/c856220/u11879299/docs/d9/00618ec192d1/harms.png?extra=o92MSp9KFy6m7HPW4LJEDk2prwBlEJSftAlLPcW17ZDtjV4YNzHZBI4p5RnYm7tUNd46VJU4P7eeT2ifXC2GQnJY071Uy8bzwoLXcZvihbSF9-NpPi37JRoTLmJydcURtqoo0os6RTwNSe9NJDVgQQ"
 const ZoomByDelta = [
   {
     deltaLessThan: .5,
@@ -51,7 +51,7 @@ export default class extends Component {
 
       const result = await window.ymaps.geocode("Россия, Санкт-Петербург, " + point.address)
       const pos = result.geoObjects.get(0).geometry._coordinates
-    
+
       if (minX === -1 || minX > pos[0])
         minX = pos[0]
       if (maxX === -1 || maxX < pos[0])
@@ -81,6 +81,7 @@ export default class extends Component {
               iconImageOffset: [-30, -30]
         }))
     }
+
 
     if (minX !== -1 || maxX !== -1 || minY !== -1 || maxY !== -1) {
       this.map.setCenter([(minX + maxX) / 2, (minY + maxY) / 2])
