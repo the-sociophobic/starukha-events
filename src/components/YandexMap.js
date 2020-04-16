@@ -8,7 +8,7 @@ const ZoomByDelta = [
     zoom: 11,
   },
   {
-    deltaLessThan: 0.04,
+    deltaLessThan: 0.035,
     zoom: 12,
   },
   {
