@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 
-const defaultIcon = "https://psv4.userapi.com/c856220/u11879299/docs/d9/00618ec192d1/harms.png?extra=o92MSp9KFy6m7HPW4LJEDk2prwBlEJSftAlLPcW17ZDtjV4YNzHZBI4p5RnYm7tUNd46VJU4P7eeT2ifXC2GQnJY071Uy8bzwoLXcZvihbSF9-NpPi37JRoTLmJydcURtqoo0os6RTwNSe9NJDVgQQ"
+const defaultIcon = "http://kiss-graph.com/libs/starukha/icon.png"
 const ZoomByDelta = [
   {
     deltaLessThan: .5,

@@ -1,5 +1,3 @@
-// import data from './data'
-
 import axios from 'axios'
 
 
@@ -28,7 +26,7 @@ export default class store {
   constructor(props) {
     this.props = props
     this.data = new Promise(async (res, rej) => {
-      const data = (await axios.get("https://trello.com/b/GuF3Iqf9.json")).data
+      const data = (await axios.get(props.DBlink)).data
       let idBoard = data.lists.filter(list => list.name === "Database")
       
       if (idBoard.length < 1)
