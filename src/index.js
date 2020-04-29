@@ -2,13 +2,24 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import App from './App'
+import WhatIsButton from './components/WhatIsButton'
 
 import './styles/index.sass'
-
 
 //to use async / await
 const regeneratorRuntime = require("regenerator-runtime")
 
+
+const injectedElems = [
+  {
+    id: "map-react",
+    component: <App />
+  },
+  {
+    id: "what-is-events__button",
+    component: <WhatIsButton />
+  },
+]
 
 const getNode = async (nodeId, triesNumber = 20) =>
   new Promise((res, rej) => {
@@ -42,7 +53,8 @@ const tryInjectReact = async (component, divId) => {
   }
 }
 
-tryInjectReact(<App />, "map-react")
+injectedElems.forEach(elem =>
+  tryInjectReact(elem.component, elem.id))
 
 //remove react-components by React, before readymag do it himself on orientationchange
 window.addEventListener("orientationchange", async () => {
@@ -56,5 +68,6 @@ window.addEventListener("orientationchange", async () => {
   const flag = await getNode("random-events", 3).catch(error => console.log(error))
 
   if (!flag)
-    tryInjectReact(<App />, "map-react")
+    injectedElems.forEach(elem =>
+      tryInjectReact(elem.component, elem.id))
 })

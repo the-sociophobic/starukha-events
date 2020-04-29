@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 
 import { initialState, StoreContext } from './utils/store'
 import RandomEvents from './components/RandomEvents'
-// import Home from 'components/pages/Home'
-
-// import 'styles/index.sass'
 
 
 class App extends Component {
@@ -19,9 +16,7 @@ class App extends Component {
 
   render = () => (
     <StoreContext.Provider value={this.state}>
-      <div className="App">
-        <RandomEvents />
-      </div>
+      <RandomEvents />
     </StoreContext.Provider>
   )
 }
