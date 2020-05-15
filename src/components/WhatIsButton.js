@@ -50,7 +50,6 @@ const eventDesc = [
     — на всякий случай<br />
   </>,
 ]
-const whatIsButtonId = "what-is-events__button"
 
 
 class WhatIsButton extends Component {
@@ -102,13 +101,15 @@ class WhatIsButton extends Component {
   }
 
   render = () =>
-    <button
-      className="lev-button"
-      onClick={() => this.buttonClick()}
-    >
-      {this.state.currentText === 0 ?
-        "Проект «случайно». О чем он?" : "Выбрать другое значение проекта"}
-    </button>
+    <div className="what-is-events__container">
+      <button
+        className="lev-button"
+        onClick={() => this.buttonClick()}
+      >
+        {this.state.currentText === 0 ?
+          "Проект «случайно». О чем он?" : "Выбрать другое значение проекта"}
+      </button>
+    </div>
 }
 
 export default WhatIsButton

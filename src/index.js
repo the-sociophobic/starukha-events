@@ -16,7 +16,7 @@ const injectedElems = [
     component: <App />
   },
   {
-    id: "what-is-events__button",
+    id: "what-is-events",
     component: <WhatIsButton />
   },
 ]

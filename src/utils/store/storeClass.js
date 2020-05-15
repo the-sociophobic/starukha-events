@@ -27,18 +27,18 @@ export default class store {
     this.props = props
     this.data = new Promise(async (res, rej) => {
       const data = (await axios.get(props.DBlink)).data
-      let idBoard = data.lists.filter(list => list.name === "Database")
-      
-      if (idBoard.length < 1)
+      let listId = data.lists.filter(list => list.name === "Database")
+
+      if (listId.length < 1)
         rej("no Database board")
 
       const mappedPoints = data.cards
-        .filter(card => card.idBoard === idBoard[0].idBoard)
+        .filter(card => card.idList === listId[0].id)
         .map(card => {
           const address = sliceBetweenWords(card.desc, ["<адрес>"], ["</адрес>"])
           const addressNice = sliceBetweenWords(card.desc, ["<красивый адрес>"], ["</красивый адрес>"])
           const body = sliceBetweenWords(card.desc, ["<случай>"], ["</случай>"])
-          const img = sliceBetweenWords(card.desc, ["<image>"], ["</image>"])
+          const img = sliceBetweenWords(card.desc, ["<image>"], ["</image>"]).replace(" ", "")
           const damadged = address === "" || body === ""
 
           return {

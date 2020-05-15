@@ -10,9 +10,9 @@
 // code
 //   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace
 
-// @font-face
-//   font-family: 'NWTBodoni0'
-//   src: url('https://fonts.tildacdn.com/get/?fonts=167,168,169,170&format=woff2') //format('truetype')
+@font-face
+  font-family: 'Bodoni'
+  src: url('https://kiss-graph.com/libs/starukha/font') //format('truetype')
 
 
 $dark: black
@@ -20,7 +20,8 @@ $orange: #ff8562
 
 
 .lev-button
-  // font-family:'NWTBodoni0'
+  font-family: 'Bodoni', arial
+  // font-family: "Times New Roman", Times, serif
   background: black
   color: white
   outline: none
@@ -31,9 +32,6 @@ $orange: #ff8562
   flex-grow: 1
   margin: 0 20px 20px
 
-#map-react, #what-is-events__button
-  // * 
-  //   box-sizing: border-box
 #map-react
   width: 100%
   .random-events
@@ -74,7 +72,8 @@ $orange: #ff8562
   *
     box-sizing: border-box
   &__text-area
-    // font-family:'NWTBodoni0'
+    font-family: 'Bodoni', arial
+    // font-family: "Times New Roman", Times, serif
     position: absolute
     width: 70vw
     height: 70vh
@@ -85,11 +84,13 @@ $orange: #ff8562
     padding: 30px 50px
     font-size: 20px
     cursor: default
+    font-size: 18px
     @media (max-width: 1200px)
       width: 90vw
       left: 5vw
       padding: 20px 30px
     @media (max-width: 768px)
+      font-size: 14px
       width: 95vw
       left: 2.5vw
       padding: 10px
@@ -104,6 +105,8 @@ $orange: #ff8562
       right: 10px
       width: 30px
       height: 30px
+      @media screen and ( max-width: 800px )
+        top: -45px
       &::after, &::before
         content: ""
         position: absolute
@@ -124,7 +127,7 @@ $orange: #ff8562
       img
         width: 60%
         height: auto
-        min-width: 400px
+        min-width: 266px
 
         
 
@@ -135,13 +138,17 @@ $orange: #ff8562
   @media (max-width: 360px)
     max-width: 180px
 
-#what-is-events__button
+#what-is-events
   width: 100%
-  display: flex
-  justify-content: space-between
-  flex-direction: column
-  align-items: center
-  .lev-button
-    border-radius: 50px
-    padding-left: 50px
-    padding-right: 50px
+  height: 270px
+  .what-is-events__container
+    width: 100%
+    display: flex
+    justify-content: space-between
+    flex-direction: column
+    align-items: center
+    .lev-button
+      height: 100px
+      border-radius: 150px
+      padding-left: 50px
+      padding-right: 50px
