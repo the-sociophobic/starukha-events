@@ -41,6 +41,14 @@ export default class extends Component {
     return state
   }
 
+  setCurrent = (point, placemark) => {
+    // console.log(this.map.geoObjects)
+    // this.map.geoObjects.each(point => point.properties.set('iconImageSize', [62, 62]))
+    // this.map.geoObjects.each(point => console.log(point))
+    // placemark.properties.set('iconImageSize', [42, 42])
+    this.props.setCurrent(point)
+  }
+
   replacePoints = async props => {
     this.map.geoObjects.removeAll()
 
@@ -61,25 +69,33 @@ export default class extends Component {
       if (maxY === -1 || maxY < pos[1])
         maxY = pos[1]
 
-      this.map.geoObjects
-        .add(new window.ymaps.Placemark(
-            pos,
-            {
-              balloonContent: `
-                <div class="yandex-baloon">
-                  <h2 style="margin-bottom: 10px">${point.heading}</h2>
-                  <small><i>${point.addressNice || point.address}</i></small><br><br>
-                  ${point.body}<br><br>
-                  ${point.img !== "" ? `<img style='width: 70%' src=${point.img}></img>` : ""}
-                </div>
-                `,
-              iconCaption: point.heading,
-            },{
-              iconLayout: 'default#image',
-              iconImageHref: point.icon || defaultIcon,
-              iconImageSize: [64, 64],
-              iconImageOffset: [-30, -30]
-        }))
+      const pointPlacemark = new window.ymaps.Placemark(
+        pos,
+        {
+          // balloonContent: `
+          //   <div class="yandex-baloon">
+          //     <h2 style="margin-bottom: 10px">${point.heading}</h2>
+          //     <small><i>${point.addressNice || point.address}</i></small><br><br>
+          //     ${point.body}<br><br>
+          //     ${point.img !== "" ? `<img style='width: 70%' src=${point.img}></img>` : ""}
+          //   </div>
+          //   `,
+          // iconCaption: point.heading,
+          // iconLayout: 'default#image',
+          // iconImageHref: point.icon || defaultIcon,
+          // iconImageSize: [42, 42],
+          // iconImageOffset: [-21, -21]
+        },{
+          iconLayout: 'default#image',
+          iconImageHref: point.icon || defaultIcon,
+          iconImageSize: [32, 32],
+          iconImageOffset: [-16, -16],
+          hasBalloon: false,
+      })
+      pointPlacemark.events.add('click', () => this.setCurrent(point, pointPlacemark))
+      // pointPlacemark.events.add('balloonclose', () => this.setCurrent())
+
+      this.map.geoObjects.add(pointPlacemark)
     }
 
 
