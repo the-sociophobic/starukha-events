@@ -38,12 +38,6 @@ class RandomEvents extends Component {
 
     return (
       <div className="random-events" id="random-events">
-        <div className="random-events__map-container">
-          <YandexMap
-            points={this.state.currentCases}
-            setCurrent={value => this.setState({currentPoint: value})}
-          />
-        </div>
         <div className="random-events__button-row">
           <button
             className="random-events__button-row__item"
@@ -52,8 +46,23 @@ class RandomEvents extends Component {
             случайные случаи
           </button>
         </div>
+        <div className="random-events__map-container">
+          <YandexMap
+            points={this.state.currentCases}
+            setCurrent={value => {
+              this.setState({
+                currentPoint: value,
+                justAppeared: true,
+              })
+              setTimeout(() => this.setState({justAppeared: false}), 555)
+            }}
+          />
+        </div>
         {point &&
-          <div className="random-events__current-point">
+          <div
+            className={"random-events__current-point " + 
+              (this.state.justAppeared && "random-events__current-point--appeared")}
+          >
             <h2 className="random-events__current-point__h2">{point.heading}</h2>
             <div className="random-events__current-point__address">
               {point.addressNice || point.address}

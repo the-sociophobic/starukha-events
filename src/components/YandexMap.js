@@ -16,8 +16,16 @@ const ZoomByDelta = [
     zoom: 13,
   },
   {
-    deltaLessThan: 0.005,
+    deltaLessThan: 0.004,
     zoom: 14,
+  },
+  {
+    deltaLessThan: 0.0005,
+    zoom: 15,
+  },
+  {
+    deltaLessThan: 0.00025,
+    zoom: 16,
   },
 ]
 
@@ -105,10 +113,12 @@ export default class extends Component {
       const deltaY = maxY - minY
       const aspect = this.mapRef.current.clientWidth / this.mapRef.current.clientHeight
       const maxDelta = deltaX / deltaY > aspect ? deltaY : deltaX
+      // console.log(maxDelta)
       
       let index = 0
       while (ZoomByDelta[index].deltaLessThan > maxDelta)
         index++
+      // console.log(index)
       this.map.setZoom(ZoomByDelta[index - 1].zoom)
     }
   }
@@ -120,6 +130,8 @@ export default class extends Component {
         center: [59.946897, 30.332514],
         zoom: 11
       })
+      this.map.behaviors.disable('drag')
+
       this.setState({ready: true})
     })
   }

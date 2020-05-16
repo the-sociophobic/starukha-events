@@ -11,7 +11,7 @@
 //   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace
 
 @font-face
-  font-family: 'Bodoni'
+  font-family: 'Circe'
   src: url('https://kiss-graph.com/libs/starukha/font') //format('truetype')
 
 
@@ -19,16 +19,19 @@ $dark: black
 $orange: #ff8562
 
 
+body
+  background-color: black
+
 .lev-button
-  font-family: 'Bodoni', arial
+  font-family: 'Circe', arial
   // font-family: "Times New Roman", Times, serif
   background: black
   color: white
   outline: none
   cursor: pointer
   height: 50px
+  line-height: 50px
   font-size: 18px
-  // width: 46%
   flex-grow: 1
   margin: 0 20px 20px
 
@@ -41,45 +44,84 @@ $orange: #ff8562
     &__map-container
       width: 100%
       height: 450px
-      margin-bottom: 20px
       #map
         width: 100%
         height: 100%
-    &__item
-      width: 100%
-      display: table
-      &__img
-        width: 100%
     &__button-row
       display: flex
       justify-content: space-between
       flex-direction: column
+      margin-top: 20px
       @media (max-width: 768px)
         flex-direction: column
       &__item
         @extend .lev-button
+        background-color: #2e4080
+        border: 3px solid #ffc120
+        font-weight: 800
+        border-radius: 10px
+        // border-top-left-radius: 18px
+        // border-bottom-right-radius: 18px
+        position: relative
+        z-index: 10
+        text-transform: uppercase
+        box-shadow: 6px 6px teal
+        &:hover
+          background-color: #c0c5f1
+          color: black
+          box-shadow: 4px 4px teal
+        &:active
+          color: black
+          background-color: #d96b44
+          box-shadow: 1px 1px teal
+        // &:before
+        //   content: ''
+        //   position: absolute
+        //   z-index: -1
+        //   width: 100%
+        //   height: 100%
+        //   left: 0
+        //   top: 10px
+        //   border-radius: 10px
+        //   background-color: white
     &__current-point
-      width: 90%
+      box-sizing: border-box
       display: flex
       flex-direction: column
-      margin: auto
-      border: 3px solid black
+      width: 100%
+      border: 2px solid white
       padding: 10px
-      margin-bottom: 20px
+      margin: 0 0 20px 0
+      position: relative
+      z-index: 10
+      background-color: black
+      &--appeared
+        transition: opacity .5s, margin-top .5s
+        animation: appear .5s
+        animation-iteration-count: 1
+        @keyframes appear
+          0%
+            opacity: 0
+            margin-top: -30px
+          100%
+            opacity: 1
+            margin-top: 0px
       *
-        font-family: 'Bodoni', arial
+        font-family: 'Circe', arial
+        color: white
+        letter-spacing: normal
       &__h2
         font-size: 25px
         font-weight: 800
-        margin-bottom: 20px
+        margin: 10px 20px
         text-align: center
       &__address
         font-style: italic
         font-size: 14px
         margin-bottom: 15px
-        color: gray
       &__body
-        font-size: 18px
+        font-size: 16px
+        letter-spacing: normal
         margin-bottom: 20px
       &__img
         width: 50%
@@ -98,7 +140,7 @@ $orange: #ff8562
   *
     box-sizing: border-box
   &__text-area
-    font-family: 'Bodoni', arial
+    font-family: 'Circe', arial
     // font-family: "Times New Roman", Times, serif
     position: absolute
     width: 70vw
