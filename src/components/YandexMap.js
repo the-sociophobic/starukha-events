@@ -131,6 +131,7 @@ export default class extends Component {
         zoom: 11
       })
       this.map.behaviors.disable('drag')
+      this.map.behaviors.disable('scrollZoom')
 
       this.setState({ready: true})
     })

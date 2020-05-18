@@ -16,7 +16,17 @@ class RandomEvents extends Component {
     }
   }
 
-  componentDidMount = () => this.getRandom()
+  componentDidMount = () => {
+    document.addEventListener("keydown", this.escPress.bind(this), false)
+    this.getRandom()
+  }
+
+  componentWillUnmount = () => 
+    document.removeEventListener("keydown", this.escPress.bind(this), false)
+
+  escPress = e =>
+    e.keyCode === 27 &&
+      this.setState({currentPoint: undefined})
 
   getRandom = async () => {
     const data = await this.context.store.get(),
@@ -57,26 +67,30 @@ class RandomEvents extends Component {
               setTimeout(() => this.setState({justAppeared: false}), 555)
             }}
           />
+          {point &&
+            <div
+              className={"random-events__current-point " + 
+                (this.state.justAppeared && "random-events__current-point--appeared")}
+            >
+              <div
+                className="random-events__current-point__cross"
+                onClick={() => this.setState({currentPoint: undefined})}
+              />
+              <h2 className="random-events__current-point__h2">{point.heading}</h2>
+              <div className="random-events__current-point__address">
+                {point.addressNice || point.address}
+              </div>
+              <div className="random-events__current-point__body">
+                {point.body}
+              </div>
+              {point.img !== "" &&
+                <img
+                  src={point.img}
+                  className="random-events__current-point__img"
+                />}
+            </div>
+          }
         </div>
-        {point &&
-          <div
-            className={"random-events__current-point " + 
-              (this.state.justAppeared && "random-events__current-point--appeared")}
-          >
-            <h2 className="random-events__current-point__h2">{point.heading}</h2>
-            <div className="random-events__current-point__address">
-              {point.addressNice || point.address}
-            </div>
-            <div className="random-events__current-point__body">
-              {point.body}
-            </div>
-            {point.img !== "" &&
-              <img
-                src={point.img}
-                className="random-events__current-point__img"
-              />}
-          </div>
-        }
       </div>
     )
   }
