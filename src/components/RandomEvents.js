@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { StoreContext } from '../utils/store'
+import getRandomArrayElements from '../utils/getRandomArrayElements'
 import YandexMap from './YandexMap'
 
 
@@ -29,16 +30,10 @@ class RandomEvents extends Component {
       this.setState({currentPoint: undefined})
 
   getRandom = async () => {
-    const data = await this.context.store.get(),
-          simpleNumber = 17,
-          start = Math.round(Math.random() * (data.length - 1))
-    let array = []
-
-    for (let i = 0; i < numberOfCases; i++)
-      array.push(data[(start + (i * simpleNumber)) % data.length])
+    const data = await this.context.store.get()
     
     this.setState({
-      currentCases: array,
+      currentCases: getRandomArrayElements(data, numberOfCases),
       currentPoint: undefined
     })
   }

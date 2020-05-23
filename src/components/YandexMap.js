@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import EasterEgg from './EasterEgg'
 
 const defaultIcon = "https://kiss-graph.com/libs/starukha/icon.png"
 const ZoomByDelta = [
@@ -39,6 +40,7 @@ export default class extends Component {
     }
 
     this.mapRef = new React.createRef()
+    this.easterEggRef = new React.createRef()
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -80,14 +82,9 @@ export default class extends Component {
       const pointPlacemark = new window.ymaps.Placemark(
         pos,
         {
-          // balloonContent: `
-          //   <div class="yandex-baloon">
-          //     <h2 style="margin-bottom: 10px">${point.heading}</h2>
-          //     <small><i>${point.addressNice || point.address}</i></small><br><br>
-          //     ${point.body}<br><br>
-          //     ${point.img !== "" ? `<img style='width: 70%' src=${point.img}></img>` : ""}
-          //   </div>
-          //   `,
+          balloonContent: `
+            <h2>${point.heading}</h2>
+          `,
           // iconCaption: point.heading,
           // iconLayout: 'default#image',
           // iconImageHref: point.icon || defaultIcon,
@@ -126,7 +123,7 @@ export default class extends Component {
 
   componentDidMount = () => {
     window.ymaps.ready(() => {
-      this.map = new ymaps.Map("map", {
+      this.map = new window.ymaps.Map("map", {
         center: [59.946897, 30.332514],
         zoom: 11
       })
@@ -134,12 +131,22 @@ export default class extends Component {
       this.map.behaviors.disable('scrollZoom')
 
       this.setState({ready: true})
+
+      this.searchControl = this.map.controls.get('searchControl')
+      this.searchControl.events.add('submit', () =>
+        this.searchControl.getRequestString().toLowerCase() === "r4ve" &&
+          this.easterEggRef.current &&
+          this.easterEggRef.current.start()
+      , this)
     })
   }
 
   render = () =>
-    <div
-      id="map"
-      ref={this.mapRef}
-    />
+    <>
+      <div
+        id="map"
+        ref={this.mapRef}
+      />
+      <EasterEgg ref={this.easterEggRef} />
+    </>
 }
