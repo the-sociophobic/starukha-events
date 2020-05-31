@@ -30,6 +30,13 @@ const ZoomByDelta = [
   },
 ]
 
+const sizeConverter = (size, W = 902, H = 1200) =>
+  ({
+    iconImageSize: [Math.round(W / 10 * size), Math.round(H / 10 * size)],
+    iconImageOffset: [-Math.round(W / 20 * size), -Math.round(H * .95 / 10 * size)]
+  })
+
+
 
 export default class extends Component {
   constructor(props) {
@@ -83,7 +90,7 @@ export default class extends Component {
         pos,
         {
           balloonContent: `
-            <h2>${point.heading}</h2>
+            <h3>${point.heading}</h3>
           `,
           // iconCaption: point.heading,
           // iconLayout: 'default#image',
@@ -93,11 +100,9 @@ export default class extends Component {
         },{
           iconLayout: 'default#image',
           iconImageHref: point.icon || defaultIcon,
-          iconImageSize: [32, 32],
-          iconImageOffset: [-16, -16],
-          hasBalloon: false,
+          ...sizeConverter(.5)
       })
-      pointPlacemark.events.add('click', () => this.setCurrent(point, pointPlacemark))
+      // pointPlacemark.events.add('click', () => this.setCurrent(point, pointPlacemark))
       // pointPlacemark.events.add('balloonclose', () => this.setCurrent())
 
       this.map.geoObjects.add(pointPlacemark)

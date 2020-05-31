@@ -57,12 +57,12 @@ class RandomEvents extends Component {
             setCurrent={value => {
               this.setState({
                 currentPoint: value,
-                justAppeared: true,
+                // justAppeared: true,
               })
-              setTimeout(() => this.setState({justAppeared: false}), 555)
+              // setTimeout(() => this.setState({justAppeared: false}), 555)
             }}
           />
-          {point &&
+          {/* {point &&
             <div
               className={"random-events__current-point " + 
                 (this.state.justAppeared && "random-events__current-point--appeared")}
@@ -84,7 +84,41 @@ class RandomEvents extends Component {
                   className="random-events__current-point__img"
                 />}
             </div>
-          }
+          } */}
+        </div>
+        <div className="random-events__events">
+          {this.state.currentCases.map(point => (
+            <div className="random-events__item">
+              <div
+                className="random-events__item__cross"
+                onClick={() => this.setState({currentPoint: undefined})}
+              />
+              <h2 className="random-events__item__h2">{point.heading}</h2>
+              <div className="random-events__item__address">
+                {point.addressNice || point.address}
+              </div>
+              <div className="random-events__item__body">
+                {point.body}
+              </div>
+              {point.img !== "" &&
+                <img
+                  src={point.img}
+                  className="random-events__item__img"
+                />
+              }
+            </div>
+          ))}
+        </div>
+        <div className="random-events__button-row">
+          <button
+            className="random-events__button-row__item"
+            onClick={() => {
+              this.getRandom()
+              window.location.href = "#" + "random-events"
+            }}
+          >
+            загрузить новые случаи
+          </button>
         </div>
       </div>
     )
