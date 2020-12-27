@@ -52,7 +52,7 @@ export default class extends Component {
 
   static getDerivedStateFromProps(props, state) {
     if (!state.ready)
-      return
+      return state
 
     state.replacePoints(props)
     return state
@@ -138,11 +138,13 @@ export default class extends Component {
       this.setState({ready: true})
 
       this.searchControl = this.map.controls.get('searchControl')
-      this.searchControl.events.add('submit', () =>
-        this.searchControl.getRequestString().toLowerCase() === "r4ve" &&
-          this.easterEggRef.current &&
-          this.easterEggRef.current.start()
-      , this)
+      this.searchControl.events.add('submit', () => {
+        if (this.searchControl.getRequestString().toLowerCase() === "r4ve")
+          this.easterEggRef.current && this.easterEggRef.current.start()
+
+        if (this.searchControl.getRequestString() === "ДП")
+          this.easterEggRef.current && this.easterEggRef.current.start("ДП")
+      }, this)
     })
   }
 
